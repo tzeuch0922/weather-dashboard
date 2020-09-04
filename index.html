@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <header class="bg-dark text-light text-center">
+        <h1>Weather Dashboard</h1>
+    </header>
+    <main class="row">
+        <div class="col-4" id="city-search">
+            <div class="font-weight-bold" id="search-bar">
+                <p>Search for a City:</p>
+                <div class="input-group md-form form-sm form-2 pl-0 mb-3">
+                    <input class="form-control my-0 py-1" type="text" placeholder="Search" aria-label="Search" id="input-search">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="search-button">
+                            <i class="fa fa-search text-white" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div id="search-history">
+                <ul class="list-unstyled">
+                    <!-- Place holder buttons -->
+                    <li><button class="bg-light w-100 text-left pl-3 py-2 border-1">Austin</button></li>
+                    <li><button class="bg-light w-100 text-left pl-3 py-2 border-1">Chicago</button></li>
+                    <li><button class="bg-light w-100 text-left pl-3 py-2 border-1">New York</button></li>
+                    <li><button class="bg-light w-100 text-left pl-3 py-2 border-1">Orlando</button></li>
+                    <li><button class="bg-light w-100 text-left pl-3 py-2 border-1">San Francisco</button></li>
+                    <li><button class="bg-light w-100 text-left pl-3 py-2 border-1">Seattle</button></li>
+                    <li><button class="bg-light w-100 text-left pl-3 py-2 border-1">Denver</button></li>
+                    <li><button class="bg-light w-100 text-left pl-3 py-2 border-1">Atlanta</button></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-8 hidden" id="forecast">
+            <div class="my-3 p-3" id="current-day-forecast">
+                <h2 class="my-0"><span id="city-name"></span> <span id="date"></span><img id="weather-icon" src=""></h2>
+                <p>Temperature: <span id="temperature"></span>&#176F</p>
+                <p>Humidity: <span id="humidity"></span>%</p>
+                <p>Wind Speed: <span id="wind-speed"></span> MPH</p>
+                <p>UV Index: <span id="uv-index" class="bg-red text-light px-1 pb-1">9.49</span></p>
+            </div>
+            <div id="five-day-forecast">
+                <h3>5-Day Forecast:</h3>
+                <div id="forecast-container" class="d-flex w-100">
+                    <div class="bg-blue text-light mr-3 pl-2" id="forecast-day-0">
+                        <p><span class="date"></span></p>
+                        <p><img class="icon" src="" alt=""></p>
+                        <p>Temp: <span class="temperature"></span>&#176F</p>
+                        <p>Humidity: <span class="humidity"></span></p>
+                    </div>
+                    <div class="bg-blue text-light mr-3 pl-2" id="forecast-day-1">
+                        <p><span class="date"></span></p>
+                        <p><img class="icon" src="" alt=""></p>
+                        <p>Temp: <span class="temperature"></span>&#176F</p>
+                        <p>Humidity: <span class="humidity"></span></p>
+                    </div>
+                    <div class="bg-blue text-light mr-3 pl-2" id="forecast-day-2">
+                        <p><span class="date"></span></p>
+                        <p><img class="icon" src="" alt=""></p>
+                        <p>Temp: <span class="temperature"></span>&#176F</p>
+                        <p>Humidity: <span class="humidity"></span></p>
+                    </div>
+                    <div class="bg-blue text-light mr-3 pl-2" id="forecast-day-3">
+                        <p><span class="date"></span></p>
+                        <p><img class="icon" src="" alt=""></p>
+                        <p>Temp: <span class="temperature"></span>&#176F</p>
+                        <p>Humidity: <span class="humidity"></span></p>
+                    </div>
+                    <div class="bg-blue text-light mr-3 pl-2" id="forecast-day-4">
+                        <p><span class="date"></span></p>
+                        <p><img class="icon" src="" alt=""></p>
+                        <p>Temp: <span class="temperature"></span>&#176F</p>
+                        <p>Humidity: <span class="humidity"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>

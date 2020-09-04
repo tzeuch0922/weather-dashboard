@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 30px;
+}
+header {
+    padding: 5px;
+    margin-bottom: 0px;
+}
+.row {
+    margin-right: +0px;
+    margin-left: +0px;
+}
+#city-search {
+    background-color: #F5F5F5;
+}
+#search-bar {
+    font-size: 26px;
+}
+#search-history ul li button {
+    border: solid 1px #DADADA;
+    font-size: 18px;
+}
+.input-group.md-form.form-sm.form-2 input {
+    border: 1px solid #bdbdbd;
+}
+#search-button {
+    background-color: #007AFF;
+}
+#current-day-forecast {
+    border-left: solid 1px #DADADA;
+    border-bottom: solid 1px #DADADA;
+    border-top: solid 1px #DADADA;
+}
+.bg-red {
+    background: red;
+}
+.bg-blue {
+    background: skyblue;
+}
+#forecast-container {
+    box-sizing: border-box;
+}
+#forecast-container div {
+    width: 20%;
+}
+.hidden {
+    display: none;
+}
