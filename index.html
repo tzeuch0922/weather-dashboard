@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Weather Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div id="search-history">
-                <ul class="list-unstyled">
+                <ul class="list-unstyled" id="search-history-list">
                     <!-- Place holder buttons -->
                     <li><button class="bg-light w-100 text-left pl-3 py-2 border-1">Austin</button></li>
                     <li><button class="bg-light w-100 text-left pl-3 py-2 border-1">Chicago</button></li>
@@ -45,7 +45,7 @@
                 <p>Temperature: <span id="temperature"></span>&#176F</p>
                 <p>Humidity: <span id="humidity"></span>%</p>
                 <p>Wind Speed: <span id="wind-speed"></span> MPH</p>
-                <p>UV Index: <span id="uv-index" class="bg-red text-light px-1 pb-1">9.49</span></p>
+                <p>UV Index: <span id="uv-index" class="text-light px-1 pb-1">9.49</span></p>
             </div>
             <div id="five-day-forecast">
                 <h3>5-Day Forecast:</h3>

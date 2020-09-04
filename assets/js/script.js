@@ -1,3 +1,46 @@
+// Load search history to webpage, if it exists.
+function loadSearchHistory()
+{
+    var loadedHistory = localStorage.getItem("searches");
+
+    if(!loadedHistory)
+    {
+        updateSearchHistory(true);
+        return;
+    }
+    recentSearch = JSON.parse(loadedHistory);
+    updateSearchHistory(false);
+    updateWeatherData(recentSearch[recentSearch.length - 1]);
+}
+
+// Update buttons and eventlisteners for buttons used for search history.
+function updateSearchHistory(initial)
+{
+    // Sort searchList to make an alphabetical list of locations.
+    var temp = JSON.parse(JSON.stringify(recentSearch));
+    var sortedSearches = temp.sort();
+
+    searchHistoryEl.innerHTML = "";
+
+    sortedSearches.forEach(function(item)
+    {
+        if(item !== recentSearch[recentSearch.length - 1] || initial)
+        {
+            var listItemEl = document.createElement("li");
+            var newButtonEl = document.createElement("button");
+            newButtonEl.className = "bg-light w-100 text-left pl-3 py-2 border-1";
+            newButtonEl.textContent = item;
+            newButtonEl.value = item;
+            newButtonEl.addEventListener("click", function()
+            {
+                updateWeatherData(newButtonEl.value);
+            });
+            listItemEl.appendChild(newButtonEl);
+            searchHistoryEl.appendChild(listItemEl);
+        }
+    });
+}
+
 // Update weather on webpage
 function updateWeatherData(city)
 {
@@ -16,10 +59,13 @@ function updateWeatherData(city)
             response.json().then(function(data)
             {
                 cityNameEl.textContent = data.name;
+                append(data.name);
                 latitude = data.coord.lat;
                 longitude = data.coord.lon;
-                console.log(data);
-            }).then(function(response)
+                updateSearchHistory(false);
+                localStorage.setItem("searches", JSON.stringify(recentSearch));
+            })
+            .then(function(response)
             {
                 fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}`).then(function(response)
                 {
@@ -35,6 +81,26 @@ function updateWeatherData(city)
                             humidityEl.textContent = data.current.humidity;
                             windSpeedEl.textContent = mpsToMPH(data.current.wind_speed);
                             uvIndexEl.textContent = data.current.uvi;
+                            if(data.current.uvi <= 2)
+                            {
+                                uvIndexEl.className = "bg-success text-light px-1 pb-1";
+                            }
+                            else if(data.current.uvi <= 5)
+                            {
+                                uvIndexEl.className = "bg-warning text-light px-1 pb-1";
+                            }
+                            else if(data.current.uvi <= 8)
+                            {
+                                uvIndexEl.className = "bg-caution text-light px-1 pb-1";
+                            }
+                            else if(data.current.uvi <= 11)
+                            {
+                                uvIndexEl.className = "bg-danger text-light px-1 pb-1";
+                            }
+                            else
+                            {
+                                uvIndexEl.className = "bg-highdanger text-light px-1 pb-1";
+                            }
                             for(var i = 0; i < 5; i++)
                             {
                                 // Query for individual elements to replace values
@@ -71,7 +137,7 @@ function updateWeatherData(city)
         }
         else
         {
-            window.alert("City not found or empty search.");
+            window.alert("City not found.");
         }
     });
 }
@@ -88,6 +154,7 @@ function mpsToMPH(speed)
     return Math.round(2.23694*speed);
 }
 
+// Average all values in an array.
 function average(nums)
 {
     var sum = 0;
@@ -98,8 +165,38 @@ function average(nums)
     return sum/nums.length;
 }
 
+// Append object to recentSearch array. Will remove searches older than last 12 searches.
+function append(item)
+{
+    if(recentSearch.includes(item))
+    {
+        for(var i = 0; i < recentSearch.length; i++)
+        {
+            if(recentSearch[i] === item)
+            {
+                recentSearch.splice(i, 1);
+                break;
+            }
+        }
+        recentSearch.push(item);
+    }
+    else if(recentSearch.length === 12)
+    {
+        recentSearch.splice(0, 1);
+        recentSearch.push(item);
+    }
+    else
+    {
+        recentSearch.push(item);
+    }
+}
+
 // Set api-key
 var apiKey = "d423db8c340a5369b71dde7b447e8bce";
+
+// Instantiate variables to keep track of most recent searches.
+var recentSearch = ["Austin", "Chicago", "New York", "Orlando", "San Francisco", "Seattle", "Denver", "Atlanta"];
+var searchHistoryEl = document.querySelector("#search-history-list");
 
 // Query all elements that need to be updated in current weather
 var dateEl = document.querySelector("#date");
@@ -122,13 +219,15 @@ for(var i = 0; i < 5; i++)
 var searchButtonEl = document.querySelector("#search-button");
 var searchBarEl = document.querySelector("#input-search");
 
+loadSearchHistory();
+
 // Add event listeners
 searchButtonEl.addEventListener("click", function()
 {
-    console.dir(searchBarEl);
     if(searchBarEl.value)
     {
         updateWeatherData(searchBarEl.value);
+        searchBarEl.value = "";
     }
     else
     {

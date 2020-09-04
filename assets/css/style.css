@@ -28,6 +28,9 @@ header {
 #search-button {
     background-color: #007AFF;
 }
+#search-button:hover {
+    background-color: #009AFF;
+}
 #current-day-forecast {
     border-left: solid 1px #DADADA;
     border-bottom: solid 1px #DADADA;
@@ -44,6 +47,12 @@ header {
 }
 #forecast-container div {
     width: 20%;
+}
+.bg-caution {
+    background-color: #F7C183;
+}
+.bg-highdanger {
+    background-color: #A55EF6;
 }
 .hidden {
     display: none;
